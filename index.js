@@ -1,22 +1,27 @@
-const { request } = require('express')
+const { request, response } = require('express')
 const express = require('express')
 const app = express()
+
+app.use(express.json())
 
 let notes = [
     {
         "id": 1,
         "content": "repasar los retos",
-        "date": "2019-05-30-30T18:39:34.091Z"
+        "date": "2019-05-30-30T18:39:34.091Z",
+        "important": true
     },
     {
         "id": 2,
         "content": "matar los retos",
-        "date": "2019-05-30-30T18:39:34.091Z"
+        "date": "2019-05-30-30T18:39:34.091Z",
+        "important": false
     },
     {
         "id": 3,
         "content": "repasar los retos",
-        "date": "2019-05-30-30T18:39:34.091Z"
+        "date": "2019-05-30-30T18:39:34.091Z",
+        "important": true
     }
 ]
 
@@ -42,6 +47,13 @@ app.delete('/api/notes/:id', (request, response) =>{
     const id = Number(request.params.id)
     notes = notes.filter(note => note.id !== id)
     response.status(204).end()
+})
+
+app.post('/api/notes', (request, response) =>{
+    const note = request.body
+    console.log(note)
+
+    response.json(note)
 })
 
 const PORT = 3001
