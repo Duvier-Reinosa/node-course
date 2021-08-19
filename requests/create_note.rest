@@ -1,4 +1,5 @@
 POST http://localhost:3001/api/notes
+Content-Type: application/json
 
 {
     "content": "hacer app en node"
